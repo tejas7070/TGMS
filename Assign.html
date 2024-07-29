@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher-Student Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(dp2.jpg);
+        
+            
+        }
+
+        .container {
+            max-width: 520px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 380px;
+            
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 35px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        
+        .student-data-button {
+            background-color: #28a745;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .student-data-button:hover {
+            background-color: #1e717e;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assign Teacher to Student</h1>
+        <form>
+            <label for="teacher">Select Teacher:</label>
+            <select id="teacher" name="teacher">
+                <option value="teacher1">Rahul Kapse</option>
+                <option value="teacher2">Rajeshree Gadhave</option>
+                <option value="teacher3">Archana Augustine</option>
+                <option value="teacher1">Ekta Ukey</option>
+                <option value="teacher2">Abhijeet More</option>
+                <option value="teacher3">Snehal Shinde</option>
+                <option value="teacher1">Shrijita Bhatacharje</option>
+                <option value="teacher2">Shrutika Khobragade</option>
+                <option value="teacher3">Nikita Shendane</option>
+            </select>
+
+            <label for="student">Select Student:</label>
+            <select id="student" name="student">
+                <option value="student1">SE Batch 1</option>
+                <option value="student2">SE Batch 2</option>
+                <option value="student3">SE Batch 3</option>
+                <option value="student1">TE Batch 1</option>
+                <option value="student2">TE Batch 2</option>
+                <option value="student3">TE Batch 3</option>
+                <option value="student1">BE Batch 1</option>
+                <option value="student2">BE Batch 2</option>
+                <option value="student3">BE Batch 3</option>
+            </select>
+
+            <button type="submit">Assign</button>
+            
+            
+            <button class="student-data-button" onclick="openStudentData()"> <a href="https://lookerstudio.google.com/embed/reporting/c09d3257-ae79-44e9-972b-0ae1b181e4aa/page/D7HhD">Student Data</a></button>
+        </form>
+    </div>
+
+  
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url(back1.jpg);
+        }
+
+        .login-container {
+            width: 350px;
+            padding: 20px;
+            border-radius: 25px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container.hiding {
+            transform: translateX(-100%);
+        }
+
+        .login-container.hiding .login-form {
+            display: none;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 13px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 17px;
+            padding: 12px 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .notification {
+            text-align: center;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .switch-button {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-container">
+        <h2>Login</h2>
+        <form id="mentor-login-form" class="login-form">
+            <div class="form-group">
+                <label for="mentor-username">Mentor Username:</label>
+                <input type="text" id="mentor-username" name="mentor-username" required>
+            </div>
+            <div class="form-group">
+                <label for="mentor-password">Mentor Password:</label>
+                <input type="password" id="mentor-password" name="mentor-password" required>
+            </div>
+            <button type="submit">Mentor Login</button>
+        </form>
+        
+        <form id="admin-login-form" class="login-form" style="display:none;">
+            <div class="form-group">
+                <label for="admin-username">Admin Username:</label>
+                <input type="text" id="admin-username" name="admin-username" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Admin Password:</label>
+                <input type="password" id="admin-password" name="admin-password" required>
+            </div>
+            <button type="submit">Admin Login</button>
+        </form>
+
+        <p class="notification" id="login-notification"></p>
+        <button class="switch-button" id="switch-button">Switch to Admin Login</button>
+    </div>
+
+    <script>
+        const loginContainer = document.getElementById('login-container');
+        const mentorLoginForm = document.getElementById('mentor-login-form');
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const mentorUsernameInput = document.getElementById('mentor-username');
+        const mentorPasswordInput = document.getElementById('mentor-password');
+        const adminUsernameInput = document.getElementById('admin-username');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const notification = document.getElementById('login-notification');
+        const switchButton = document.getElementById('switch-button');
+
+        let isMentorLogin = true;
+
+        
+        const mentors = [
+            { username: 'mentor1', password: 'mes@123' },
+           
+        ];
+
+        const admins = [
+            { username: 'admin1', password: 'mes@hoc' },
+          
+        ];
+
+        switchButton.addEventListener('click', () => {
+            isMentorLogin = !isMentorLogin;
+            if (isMentorLogin) {
+                switchButton.textContent = 'Switch to Admin Login';
+                mentorLoginForm.style.display = 'block';
+                adminLoginForm.style.display = 'none';
+            } else {
+                switchButton.textContent = 'Switch to Mentor Login';
+                mentorLoginForm.style.display = 'none';
+                adminLoginForm.style.display = 'block';
+            }
+            loginContainer.classList.remove('hiding'); 
+            mentorLoginForm.reset();
+            adminLoginForm.reset();
+            notification.textContent = '';
+        });
+
+        mentorLoginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const enteredUsername = mentorUsernameInput.value;
+            const enteredPassword = mentorPasswordInput.value;
+
+           
+            const mentor = mentors.find(u => u.username === enteredUsername && u.password === enteredPassword);
+
+            if (mentor) {
+                
+                notification.textContent = 'Mentor login successful!';
+                notification.style.color = 'green';
+                setTimeout(() => {
+                    window.location.href = 'mentor-dashboard.html'; 
+                }, 1000); 
+            } else {
+                
+                notification.textContent = 'Mentor: Username or password is incorrect.';
+                notification.style.color = 'red';
+            }
+        });
+
+        adminLoginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const enteredUsername = adminUsernameInput.value;
+            const enteredPassword = adminPasswordInput.value;
+
+            
+            const admin = admins.find(u => u.username === enteredUsername && u.password === enteredPassword);
+
+            if (admin) {
+              
+                notification.textContent = 'Admin login successful!';
+                notification.style.color = 'green';
+                setTimeout(() => {
+                    window.location.href = 'Assign.html'; 
+                }, 1000);
+            } else {
+               
+                notification.textContent = 'Admin: Username or password is incorrect.';
+                notification.style.color = 'red';
+            }
+        });
+
+        
+        mentorLoginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const enteredUsername = mentorUsernameInput.value;
+    const enteredPassword = mentorPasswordInput.value;
+
+   
+    const mentor = mentors.find(u => u.username === enteredUsername && u.password === enteredPassword);
+
+    if (mentor) {
+        
+        notification.textContent = 'Mentor login successful!';
+        notification.style.color = 'green';
+        setTimeout(() => {
+            window.location.href = 'https://docs.google.com/spreadsheets/d/1wQCnifNGD6PXHYk-I2PrrzK6Mhkj4Td31c9LWcKDmFo/edit?usp=sharing'; // Redirect to index.html
+        }, 1000); 
+    } else {
+        
+        notification.textContent = 'Mentor: Username or password is incorrect.';
+        notification.style.color = 'red';
+    }
+});
+
+
+    </script>
+  
+</body>
+</html>
